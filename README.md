@@ -1,2 +1,2 @@
-# ProyectoMetodologia2022
+# ElderHelper
 Sistema de detección de caidas para ancianos.
