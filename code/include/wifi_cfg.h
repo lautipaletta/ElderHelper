@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 
-void connect_to_wifi(String ssid, String password);
+void connect_to_wifi();
+bool is_wifi_connected();
 
 #endif

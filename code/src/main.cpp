@@ -1,26 +1,35 @@
 #include <Arduino.h>
 #include "dns_server.h"
 #include "utilities.h"
+#include "wifi_cfg.h"
+
+bool dns_cfg_done = false;
 
 void setup() {
   
   Serial.begin(9600);
 
-  config_dns_server();
-
-  info_loaded = check_info_loaded();
+  INFO_LOADED = check_info_loaded();
   
 }
 
 void loop() {
 
-  if(info_loaded){
+  if(INFO_LOADED){
+
+    if(!is_wifi_connected()){
+      connect_to_wifi();
+    }
 
     // Manejo de sensores
     Serial.println("Información Cargada.");
     delay(2000);
 
   } else {
+
+    if(!dns_cfg_done){
+      dns_cfg_done = config_dns_server();
+    }
 
     // Ejecuta Captive Portal si no hay informacion cargada en el JSON
     handle_dns_requests();

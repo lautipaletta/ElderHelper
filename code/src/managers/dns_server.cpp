@@ -4,16 +4,15 @@
 #include <ESP8266WebServer.h>
 
 #include "flash_manager.h"
-#include "wifi_cfg.h"
 
 IPAddress apIP(172, 217, 28, 1);
 const byte DNS_PORT = 53;
 DNSServer dnsServer;
 ESP8266WebServer webServer(80);
 
-extern bool info_loaded;
+extern bool INFO_LOADED;
 
-void config_dns_server(){
+bool config_dns_server(){
 
     // Creacion de red wifi NodeMCU (Hotspot)
     WiFi.mode(WIFI_AP);
@@ -45,15 +44,15 @@ void config_dns_server(){
 
         WiFi.mode(WIFI_OFF);
 
-        connect_to_wifi(ssid, password);
+        dnsServer.stop();
 
-        info_loaded = true; // Seteo a 'true' el flag global para que el main.cpp empiece a leer datos de los sensores
+        INFO_LOADED = true; // Seteo a 'true' el flag global para que el main.cpp empiece a leer datos de los sensores
 
     });
 
     webServer.begin();
 
-    return;
+    return true;
 }
 
 void handle_dns_requests(){

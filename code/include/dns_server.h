@@ -3,8 +3,8 @@
 
 #include <Arduino.h>
 
-void config_dns_server();
+bool config_dns_server();
 void handle_dns_requests();
-bool info_loaded;
+bool INFO_LOADED;
 
 #endif
