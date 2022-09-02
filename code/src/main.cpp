@@ -2,6 +2,7 @@
 #include "dns_server.h"
 #include "utilities.h"
 #include "wifi_cfg.h"
+#include "telegram_bot.h"
 
 bool dns_cfg_done = false;
 
