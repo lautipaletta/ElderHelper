@@ -13,7 +13,7 @@ bool send_telegram_message(String message) {
     WiFiClient client;
     HTTPClient http;
 
-    String request = "https://api.telegram.org/bot{}/sendMessage?chat_id=" + info.chat_id + "&text=" + message;
+    String request = "https://api.telegram.org/bot5704987969:AAGXeIY0VXaAUaACoqiYibM-mv2Q6sa41hU/sendMessage?chat_id=" + info.chat_id + "&text=" + message;
 
     http.begin(client, request.c_str());
 
