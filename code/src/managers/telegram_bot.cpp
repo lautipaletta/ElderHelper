@@ -7,14 +7,13 @@
 #include "flash_manager.h"
 
 bool send_telegram_message(String message) {
-    JsonObject obj = get_user_info(); 
 
-    String chat_id = obj[String("chat_id")];
+    user_info info = get_user_info(); 
 
     WiFiClient client;
     HTTPClient http;
 
-    String request = "https://api.telegram.org/bot{}/sendMessage?chat_id=" + chat_id + "&text=" message;
+    String request = "https://api.telegram.org/bot{}/sendMessage?chat_id=" + info.chat_id + "&text=" + message;
 
     http.begin(client, request.c_str());
 

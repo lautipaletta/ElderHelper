@@ -5,15 +5,13 @@
 #include "flash_manager.h"
 
 void connect_to_wifi(){
-    JsonObject obj = get_user_info();
 
-    String ssid = obj[String("ssid")];
-    String password = obj[String("password")];
+    user_info info = get_user_info();
 
-    Serial.println("SSID: " + ssid);
-    Serial.println("Password: " + password);
+    Serial.println("SSID: " + info.ssid);
+    Serial.println("Password: " + info.password);
 
-    WiFi.begin(ssid, password);
+    WiFi.begin(info.ssid, info.password);
 
     while (WiFi.status() != WL_CONNECTED) 
     {
