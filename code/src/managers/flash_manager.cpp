@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <LittleFS.h>
+#include <ArduinoJson.h>
 
 void flash_write(String filepath, String data){
 
@@ -47,5 +48,14 @@ String flash_read(String filepath){
     LittleFS.end();
 
     return data;
+}
 
+JsonObject get_user_info() {
+    DynamicJsonDocument doc(1024);
+
+    String user_info = flash_read("/user_info.json");
+
+    deserializeJson(doc, user_info);
+
+    return doc.as<JsonObject>();
 }

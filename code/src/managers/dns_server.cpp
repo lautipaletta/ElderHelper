@@ -17,7 +17,7 @@ bool config_dns_server(){
     // Creacion de red wifi NodeMCU (Hotspot)
     WiFi.mode(WIFI_AP);
     WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-    WiFi.softAP("Proyecto ITBA 2022");
+    WiFi.softAP("ElderHelper");
 
     // Levanto servidor DNS para redireccionar peticiones (Captive Portal) 
     dnsServer.start(DNS_PORT, "*", apIP);
@@ -36,9 +36,9 @@ bool config_dns_server(){
       
         String ssid = webServer.arg(String("ssid"));
         String password = webServer.arg(String("password"));
-        String number = webServer.arg(String("number"));
+        String chat_id = webServer.arg(String("chat_id"));
         
-        String info_json = "{\"ssid\":\"" + ssid + "\",\"password\":\"" + password + "\",\"number\":" + number + "}";
+        String info_json = "{\"ssid\":\"" + ssid + "\",\"password\":\"" + password + "\",\"chat_id\":" + chat_id + "}";
 
         flash_write("/user_info.json", info_json);
 

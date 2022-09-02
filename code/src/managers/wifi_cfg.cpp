@@ -5,14 +5,7 @@
 #include "flash_manager.h"
 
 void connect_to_wifi(){
-
-    DynamicJsonDocument doc(1024);
-
-    String user_info = flash_read("/user_info.json");
-
-    deserializeJson(doc, user_info);
-
-    JsonObject obj = doc.as<JsonObject>();
+    JsonObject obj = get_user_info();
 
     String ssid = obj[String("ssid")];
     String password = obj[String("password")];
