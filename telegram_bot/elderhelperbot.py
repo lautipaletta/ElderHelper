@@ -13,10 +13,15 @@ while True:
         if updates_datos["result"][0]["message"]["text"] == "/start":
             chat_id = updates_datos["result"][0]["message"]["chat"]["id"]
 
-            response_text = 'Su+ID+es+{}.+Complete+el+formulario+de+su+dispotivo+con+este+ID.'.format(chat_id)
+            response_text = 'Complete+el+formulario+de+su+dispositivo+con+el+siguiente+ID:'
             response_url = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT_TOKEN, chat_id, response_text)
 
-            resp = requests.get(response_url)
+            requests.get(response_url)
+
+            response_id_url = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT_TOKEN, chat_id, chat_id)
+
+            requests.get(response_id_url)
+
 
         reset_update_id = str(int(updates_datos["result"][0]["update_id"]) + 1)
         requests.get('https://api.telegram.org/bot{}/getUpdates?offset={}'.format(BOT_TOKEN, reset_update_id))
