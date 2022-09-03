@@ -1,5 +1,4 @@
 import requests
-import urllib
 
 BOT_TOKEN = "5704987969:AAGXeIY0VXaAUaACoqiYibM-mv2Q6sa41hU"
 
@@ -9,7 +8,7 @@ while True:
     
     updates_datos = updates_resp.json()
 
-    if len(updates_datos["result"]) > 0:
+    if updates_datos["result"]:
         if updates_datos["result"][0]["message"]["text"] == "/start":
             chat_id = updates_datos["result"][0]["message"]["chat"]["id"]
 
