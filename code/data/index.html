@@ -1,20 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto ITBA 2022</title>
-</head>
-<body>
-    <h1>Hello world! This is a captive portal example from data folder!</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Elder Helper</title>
 
-    <form action="/dump_info" method="POST">
-        <input type="text" name="ssid" placeholder="SSID:">
-        <input type="password" name="password" placeholder="Password:">
-        <input type="text" name="chat_id" placeholder="Chat ID:">
-        <button type="submit">Submit</button>
-    </form>
+        <style>
+* {
+    font-family: Helvetica, Arial, sans-serif;
+}
+body {
+    background-color: whitesmoke;
+}
+.centerCard {
+    background-color: white;
+    padding: 3rem;
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.2);
+}
+.centerDiv {
+    height: 90vh;
+    display: grid;
+    place-items: center;
+}
+.mainTitle {
+    text-align: center;
+}
+.centerInfo {
+    display: flex;
+    flex-direction: row;
+}
+.divInfoTelegram {
+    width: 30ch;
+    border-right: 0.15rem solid lightgray;
+}
+.mainForm {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+input {
+    margin: 0.25rem 0;
+    padding: 0.1rem;
+    border: none;
+    outline: none;
+    border-bottom: 0.15rem dashed lightgray;
+    background: none;
+    overflow: hidden;
+}
+input:focus-within {
+    border-bottom: 0.15rem solid lightblue;
+}
+h4 {
+    margin: 0.2rem 0;
+}
+button {
+    padding: 0.1rem;
+    margin-top: 0.5rem;
+    background-color: white;
+    border: 0.15rem solid lightblue;
+    border-radius: 0.5rem;
+}
+button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+        </style>
+    </head>
+    <body>
+        <div class="centerDiv">
+            <div class="centerCard">
+                <h1 class="mainTitle">Elder Helper</h1>
 
-</body>
+                <div class="centerInfo">
+                    <div class="divInfoTelegram">
+                        <h3>¿Cómo obtener el ID de Telegram?</h3>
+                        <p>Para obtener el ID del chat, debe iniciar una conversación con <strong style="color: lightblue">@ElderHelperBot</strong> en Telegram.</p>
+                    </div>
+                    <form action="/dump_info" method="POST" class="mainForm">
+                        <h4>Información Red</h4>
+                        <input type="text" name="ssid" placeholder="SSID">
+                        <input type="password" name="password" placeholder="Contraseña">
+
+                        <h4>Información Telegram</h4>
+                        <input type="text" name="chat_id" placeholder="ID del chat">
+
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
 </html>
