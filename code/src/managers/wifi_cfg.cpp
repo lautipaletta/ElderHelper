@@ -17,6 +17,7 @@ void connect_to_wifi(){
     {
         delay(500);
         Serial.print("*");
+        digitalWrite(PIN_LED, !digitalRead(PIN_LED));
     }
 
     Serial.println("");
@@ -24,6 +25,7 @@ void connect_to_wifi(){
     Serial.print("The IP Address of ESP8266 Module is: ");
     Serial.println(WiFi.localIP());// Print the IP address
 
+    digitalWrite(PIN_LED, HIGH);
 }
 
 bool is_wifi_connected(){
