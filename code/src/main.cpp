@@ -22,6 +22,8 @@ void setup() {
 
   pinMode(PIN_LED, OUTPUT);
   pinMode(PIN_BTN, INPUT_PULLUP);
+
+  inicializarDetectorDeCaidas();
 }
 
 void loop() {
