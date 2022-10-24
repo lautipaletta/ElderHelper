@@ -1,6 +1,18 @@
 #include "mediciones.h"
 #include "filoArray.h"
-#include "detectorDeCaidas.h"
+#include "detector_de_caidas.h"
+
+SimpleKalmanFilter filtroX(2, 2, 0.01);
+SimpleKalmanFilter filtroY(2, 2, 0.01);
+SimpleKalmanFilter filtroZ(2, 2, 0.01);
+
+ADXL345 accelerometro;
+
+bool inEstadoCaida;
+
+filoArray dataArr;
+
+KNNClassifier modeloKnn(100);
 
 String mapToTipo(int actividad) {
     switch (actividad) {
@@ -14,19 +26,20 @@ String mapToTipo(int actividad) {
 
 void inicializarDetectorDeCaidas() 
 {
-    Serial.println("Inicializando ADXL345");
+    Serial.println("Inicializando ADXL345...");
+
     if (!accelerometro.begin())
     {
         Serial.println("No se encontro el ADXL345!! :(");
         delay(500);
-    }
+    } else Serial.println("ADXL345 Inicializado");
 
     accelerometro.setRange(ADXL345_RANGE_16G);
 
-    for (int i = 0; i < 15; i++) modeloKnn.addExample(caidas_adelante[i], CAIDA_ADELANTE);
-    for (int i = 0; i < 11; i++) modeloKnn.addExample(caidas_costado[i], CAIDA_COSTADO);
-    for (int i = 0; i < 17; i++) modeloKnn.addExample(actividad_chill[i], ACTIVIDAD_CHILL);
-    for (int i = 0; i < 15; i++) modeloKnn.addExample(actividad_notanchill[i], ACTIVIDAD_NO_CHILL);
+    for (int i = 0; i < 8; i++) modeloKnn.addExample(caidas_adelante[i], CAIDA_ADELANTE);
+    for (int i = 0; i < 8; i++) modeloKnn.addExample(caidas_costado[i], CAIDA_COSTADO);
+    for (int i = 0; i < 8; i++) modeloKnn.addExample(actividad_chill[i], ACTIVIDAD_CHILL);
+    for (int i = 0; i < 8; i++) modeloKnn.addExample(actividad_notanchill[i], ACTIVIDAD_NO_CHILL);
 
     dataArr.initializeTo(10);
 
@@ -49,9 +62,10 @@ bool dispositivoEnEstadoCaida()
 
     if ((clasificacion == CAIDA_ADELANTE || clasificacion == CAIDA_COSTADO) && !inEstadoCaida) {
         inEstadoCaida = true;
+        return true;
     }
 
     if (clasificacion == ACTIVIDAD_CHILL || clasificacion == ACTIVIDAD_NO_CHILL) inEstadoCaida = false;
 
-    return inEstadoCaida;
+    return false;
 }

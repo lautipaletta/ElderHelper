@@ -3,7 +3,7 @@
 #include "utilities.h"
 #include "wifi_cfg.h"
 #include "telegram_bot.h"
-#include "detectorDeCaidas.h"
+#include "detector_de_caidas.h"
 
 #define PIN_LED D5
 
@@ -16,6 +16,7 @@ void managerBtn();
 bool dns_cfg_done = false;
 
 void setup() {
+
   Serial.begin(9600);
 
   INFO_LOADED = check_info_loaded();
@@ -24,6 +25,7 @@ void setup() {
   pinMode(PIN_BTN, INPUT_PULLUP);
 
   inicializarDetectorDeCaidas();
+
 }
 
 void loop() {
@@ -37,14 +39,18 @@ void loop() {
     // Manejo de sensores
     managerBtn();
     
-    if (dispositivoEnEstadoCaida()) send_telegram_message("El dispositivo ha detectado una caida");
+    if(dispositivoEnEstadoCaida()){
+      Serial.println("Caida detectada.");
+      send_telegram_message("El dispositivo ha detectado una caida");
+    }
 
-    delay(15);
+    delay(5);
 
   } else {
 
     if(!dns_cfg_done){
       dns_cfg_done = config_dns_server();
+      if(dns_cfg_done) Serial.println("Hecho");
     }
 
     // Ejecuta Captive Portal si no hay informacion cargada en el JSON
