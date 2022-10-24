@@ -4,6 +4,8 @@
 
 #include "flash_manager.h"
 
+#define PIN_LED D5
+
 void connect_to_wifi(){
 
     user_info info = get_user_info();

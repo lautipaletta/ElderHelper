@@ -8,6 +8,8 @@
 #include <SimpleKalmanFilter.h>
 #include <Arduino_KNN.h>
 
+#include "filoArray.h"
+
 SimpleKalmanFilter filtroX(2, 2, 0.01);
 SimpleKalmanFilter filtroY(2, 2, 0.01);
 SimpleKalmanFilter filtroZ(2, 2, 0.01);
