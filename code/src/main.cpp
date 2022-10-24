@@ -44,13 +44,12 @@ void loop() {
       send_telegram_message("El dispositivo ha detectado una caida");
     }
 
-    delay(5);
+    delay(15);
 
   } else {
 
     if(!dns_cfg_done){
       dns_cfg_done = config_dns_server();
-      if(dns_cfg_done) Serial.println("Hecho");
     }
 
     // Ejecuta Captive Portal si no hay informacion cargada en el JSON
@@ -62,9 +61,9 @@ void loop() {
 
 void managerBtn() {
     if (digitalRead(PIN_BTN) == LOW && !btnEstaApretado && millis() - millisEnUltimoApretado > TIEMPO_REBOTE) {
-       send_telegram_message("¡Se ha presionado el botón de SOS!"); 
-       millisEnUltimoApretado = millis();
-       btnEstaApretado = true;
+      send_telegram_message("¡Se ha presionado el botón de SOS!"); 
+      millisEnUltimoApretado = millis();
+      btnEstaApretado = true;
     }
     if (digitalRead(PIN_BTN) == HIGH) btnEstaApretado = false;
 } 

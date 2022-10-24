@@ -36,7 +36,7 @@ void inicializarDetectorDeCaidas()
 
     accelerometro.setRange(ADXL345_RANGE_16G);
 
-    for (int i = 0; i < 8; i++) modeloKnn.addExample(caidas_adelante[i], CAIDA_ADELANTE);
+    for (int i = 4; i < 14; i++) modeloKnn.addExample(caidas_adelante[i], CAIDA_ADELANTE);
     for (int i = 0; i < 8; i++) modeloKnn.addExample(caidas_costado[i], CAIDA_COSTADO);
     for (int i = 0; i < 8; i++) modeloKnn.addExample(actividad_chill[i], ACTIVIDAD_CHILL);
     for (int i = 0; i < 8; i++) modeloKnn.addExample(actividad_notanchill[i], ACTIVIDAD_NO_CHILL);
